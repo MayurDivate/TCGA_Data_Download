@@ -1,6 +1,8 @@
 # TCGA_Data_Download
 
-##  Each entity in the GDC has a set of properties and links.
+##  GDC Model
+Each entity in the GDC has a set of properties and links.
+
 ### Properties
 **Type** is a required property for all entities. Entity types include project, case, demographic, sample, read_group and others
 
