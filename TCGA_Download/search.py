@@ -1,5 +1,5 @@
 import requests
-import json
+
 
 class Query:
     def __init__(self, endpoint, params):
@@ -27,8 +27,10 @@ class Query:
 
         return self.get_response()
 
-def add_filter(filters, new_filter):
 
+# utilities
+
+def add_filter(filters, new_filter):
     filters['content'].append(dict(new_filter))
     return filters
 
@@ -49,33 +51,34 @@ def get_json_response(response):
 
 
 def get_data(js_response):
-    return js_response['data']
+    return js_response.get('data')
 
 
 def get_hits(js_response):
-    return js_response['data']['hits']
+    return get_data(js_response).get('hits')
 
 
 def get_pagination(js_response):
-    return js_response['data']['pagination']
+    return get_data(js_response).get('pagination')
 
 
 def get_number_pages(js_response):
-    return get_pagination(js_response)['pages']
+    return get_pagination(js_response).get('pages')
 
 
-def get_current_page(js_response):
-    return get_pagination(js_response)['page']
+def get_current_page_number(js_response):
+    return get_pagination(js_response).get('page')
 
 
 def get_total_results(js_response):
-    return get_pagination(js_response)['total']
+    return get_pagination(js_response).get('total')
 
 
 def get_warnings(js_response):
-    return get_data(js_response)['warnings']
+    return get_data(js_response).get('warnings')
 
 
 def print_hits(hits):
     for h in hits:
         print(h)
+        print()
