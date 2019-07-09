@@ -1,7 +1,5 @@
 
 def get_end_point(name, legacy):
-    print(name, legacy)
-
     if not legacy:
         url = 'https://api.gdc.cancer.gov/'
         return url+name
