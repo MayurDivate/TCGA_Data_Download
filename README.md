@@ -1,5 +1,7 @@
 # TCGA_Data_Download
 
+This package provides utility to download data, meta-data from TCGA
+
 ##  GDC Model
 Each entity in the GDC has a set of properties and links.
 
