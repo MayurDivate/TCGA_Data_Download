@@ -1,5 +1,5 @@
 import requests
-
+import json
 
 class Query:
     def __init__(self, endpoint, params):
@@ -26,6 +26,22 @@ class Query:
             self.params['from'] = self.params['from'] - self.params['size']
 
         return self.get_response()
+
+def add_filter(filters, new_filter):
+
+    filters['content'].append(dict(new_filter))
+    return filters
+
+
+def get_filter(op, field, value):
+    my_filter = {
+        'op': op,
+        'content': {
+            'field': field,
+            'value': value
+        }
+    }
+    return my_filter
 
 
 def get_json_response(response):
