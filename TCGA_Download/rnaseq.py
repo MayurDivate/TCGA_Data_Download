@@ -35,14 +35,6 @@ class RNAseq:
                         "value": "RNA-Seq"
                     }
                 }
-                #,
-                #{
-                #    "op": "=",
-                #    "content": {
-                #        "field": "analysis.workflow_type",
-                #        "value": "HTSeq - FPKM"
-                #    }
-                #}
             ]
 
         }
