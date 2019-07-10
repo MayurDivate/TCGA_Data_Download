@@ -2,15 +2,13 @@
 
 This package provides utility to download data, meta-data from TCGA
 
-##  GDC Model
-Each entity in the GDC has a set of properties and links.
+#### Examples
 
-### Properties
-**Type** is a required property for all entities. Entity types include project, case, demographic, sample, read_group and others
+##### rnaseq_metadata_for_fpkm_files.py
 
-**System properties** are properties used in GDC system operation and maintenance. They cannot be modified except under special circumstances.
+This python program download RNAseq metadata and process it page by page.
+It limits max records per page to 100.
+Results will be save in the tcga_rnaseq.tsv file by default.
+To change default file, pas the file path with 'outfile' parameter while creating RNAseq class object.
 
-**Unique keys** are properties, or combinations of properties, that can be used to uniquely identify the entity in the GDC. For example, the tuple (combination) of [ project_id, submitter_id ] is a unique key for most entities, which means that although submitter_id does not need to be unique in GDC, it must be unique within a project. See GDC Identifiers below for details.
 
-### Links
-Links define relationships between entities, and the multiplicity of those relationships (e.g. one-to-one, one-to-many, many-to-many).
