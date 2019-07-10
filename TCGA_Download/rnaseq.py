@@ -106,19 +106,19 @@ class RNAseq:
         return self.get_value_of_dict_key(self.get_diagnoses_dict(hit), 'tissue_or_organ_of_origin')
 
     def get_primary_diagnosis(self, hit):
-        return self.get_value_of_dict_key(self.get_diagnoses_dict(hit),'primary_diagnosis')
+        return self.get_value_of_dict_key(self.get_diagnoses_dict(hit), 'primary_diagnosis')
 
     def get_tumor_stage(self, hit):
-        return self.get_value_of_dict_key(self.get_diagnoses_dict(hit),'tumor_stage')
+        return self.get_value_of_dict_key(self.get_diagnoses_dict(hit), 'tumor_stage')
 
     def get_demographic_dict(self, hit):
         return self.get_value_of_dict_key(self.get_cases_dict(hit), 'demographic')
 
     def get_gender(self, hit):
-        return self.get_value_of_dict_key(self.get_demographic_dict(hit),'gender')
+        return self.get_value_of_dict_key(self.get_demographic_dict(hit), 'gender')
 
     def get_ethnicity(self, hit):
-        return self.get_value_of_dict_key(self.get_demographic_dict(hit),'ethnicity')
+        return self.get_value_of_dict_key(self.get_demographic_dict(hit), 'ethnicity')
 
     def get_project_dict(self, hit):
         return self.get_value_of_dict_key(self.get_cases_dict(hit), 'project')
@@ -130,25 +130,25 @@ class RNAseq:
         return self.get_value_of_dict_key(self.get_program_dict(hit), 'name')
 
     def get_dbgap_accession_number(self, hit):
-        return self.get_value_of_dict_key(self.get_project_dict(hit),'dbgap_accession_number')
+        return self.get_value_of_dict_key(self.get_project_dict(hit), 'dbgap_accession_number')
 
     def get_disease_type(self, hit):
-        return self.get_value_of_dict_key(self.get_cases_dict(hit),'disease_type')
+        return self.get_value_of_dict_key(self.get_cases_dict(hit), 'disease_type')
 
     def get_primary_site(self, hit):
-        return self.get_value_of_dict_key(self.get_cases_dict(hit),'primary_site')
+        return self.get_value_of_dict_key(self.get_cases_dict(hit), 'primary_site')
 
     def get_tissue_type(self, hit):
-        return self.get_value_of_dict_key(self.get_sample_dict(hit),'tissue_type')
+        return self.get_value_of_dict_key(self.get_sample_dict(hit), 'tissue_type')
 
     def get_composition(self, hit):
         return self.get_value_of_dict_key(self.get_sample_dict(hit), 'composition')
 
     def get_sample_type(self, hit):
-        return self.get_value_of_dict_key(self.get_sample_dict(hit),'sample_type')
+        return self.get_value_of_dict_key(self.get_sample_dict(hit), 'sample_type')
 
     def get_sample_id(self, hit):
-        return self.get_value_of_dict_key(self.get_sample_dict(hit),'sample_id')
+        return self.get_value_of_dict_key(self.get_sample_dict(hit), 'sample_id')
 
     def json_to_dataframe(self, hits):
 
