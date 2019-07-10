@@ -1,4 +1,4 @@
-# TCGA_Data_Download
+# TCGA_Download
 
 This package provides utility to download data and meta-data from TCGA using its API.
 
