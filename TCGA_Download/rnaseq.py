@@ -159,8 +159,7 @@ class RNAseq:
         index = ['filename', 'project_id', 'tissue_type', 'primary_diagnosis',
                  'tumor_stage', 'disease_type', 'gender', 'ethnicity',
                  'program_name', 'dbgap_accession_number', 'primary_site',
-                 'tissue_type', 'composition', 'sample_type', 'sample_id',
-                 'id']
+                 'composition', 'sample_type', 'sample_id', 'id']
 
         rnaseq_df = None
 
@@ -168,7 +167,7 @@ class RNAseq:
             outfields = [self.get_filename(hit), self.get_project_id(hit), self.get_tissue_type(hit),
                          self.get_primary_diagnosis(hit), self.get_tumor_stage(hit), self.get_disease_type(hit),
                          self.get_gender(hit), self.get_ethnicity(hit), self.get_program_name(hit),
-                         self.get_dbgap_accession_number(hit), self.get_primary_site(hit), self.get_tissue_type(hit),
+                         self.get_dbgap_accession_number(hit), self.get_primary_site(hit),
                          self.get_composition(hit), self.get_sample_type(hit), self.get_sample_id(hit),
                          self.get_id(hit)]
 
