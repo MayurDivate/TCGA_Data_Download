@@ -1,5 +1,7 @@
 import json as js
 
+import pandas as pd
+
 
 class RNAseq:
     default_fields = ['file_name',
@@ -20,7 +22,7 @@ class RNAseq:
 
     # default_expand = 'cases.samples,cases.project,cases.project.program'
 
-    def __init__(self, fields=None, expand=None):
+    def __init__(self, outfile='tcga_rnaseq.tsv', fields=None, expand=None):
 
         if fields is None:
             self.fields = self.default_fields
@@ -30,6 +32,7 @@ class RNAseq:
         self.expand = expand
         self.filters = self.get_filters()
         self.params = self.get_params()
+        self.outfile = outfile
 
     def get_filters(self):
         filters = {
@@ -72,78 +75,90 @@ class RNAseq:
 
         return params
 
+    def get_value_of_dict_key(self, dictX, keyX):
+        """
+        :param dictX:
+        :param keyX:
+        :return: it returns "None" string if key does not exist
+        """
+
+        if keyX in dictX:
+            return dictX[keyX]
+        else:
+            return 'None'
+
     def get_filename(self, hit):
-        return hit['file_name']
+        return self.get_value_of_dict_key(hit, 'file_name')
 
     def get_id(self, hit):
-        return hit['id']
+        return self.get_value_of_dict_key(hit, 'id')
 
     def get_cases_dict(self, hit):
-        return hit['cases'][0]
+        return self.get_value_of_dict_key(hit, 'cases')[0]
 
     def get_sample_dict(self, hit):
-        return self.get_cases_dict(hit)['samples'][0]
+        return self.get_value_of_dict_key(self.get_cases_dict(hit), 'samples')[0]
 
     def get_diagnoses_dict(self, hit):
-        return self.get_cases_dict(hit)['diagnoses'][0]
+        return self.get_value_of_dict_key(self.get_cases_dict(hit), 'diagnoses')[0]
 
     def get_tissue_or_organ_of_origin(self, hit):
-        return self.get_diagnoses_dict(hit)['tissue_or_organ_of_origin']
+        return self.get_value_of_dict_key(self.get_diagnoses_dict(hit), 'tissue_or_organ_of_origin')
 
     def get_primary_diagnosis(self, hit):
-        return self.get_diagnoses_dict(hit)['primary_diagnosis']
+        return self.get_value_of_dict_key(self.get_diagnoses_dict(hit),'primary_diagnosis')
 
     def get_tumor_stage(self, hit):
-        return self.get_diagnoses_dict(hit)['tumor_stage']
+        return self.get_value_of_dict_key(self.get_diagnoses_dict(hit),'tumor_stage')
 
     def get_demographic_dict(self, hit):
-        return self.get_cases_dict(hit)['demographic']
+        return self.get_value_of_dict_key(self.get_cases_dict(hit), 'demographic')
 
     def get_gender(self, hit):
-        return self.get_demographic_dict(hit)['gender']
+        return self.get_value_of_dict_key(self.get_demographic_dict(hit),'gender')
 
     def get_ethnicity(self, hit):
-        return self.get_demographic_dict(hit)['ethnicity']
+        return self.get_value_of_dict_key(self.get_demographic_dict(hit),'ethnicity')
 
     def get_project_dict(self, hit):
-        return self.get_cases_dict(hit)['project']
+        return self.get_value_of_dict_key(self.get_cases_dict(hit), 'project')
 
     def get_program_dict(self, hit):
-        return self.get_project_dict(hit)['program']
+        return self.get_value_of_dict_key(self.get_project_dict(hit), 'program')
 
     def get_program_name(self, hit):
-        return self.get_program_dict(hit)['name']
+        return self.get_value_of_dict_key(self.get_program_dict(hit), 'name')
 
     def get_dbgap_accession_number(self, hit):
-        return self.get_project_dict(hit)['dbgap_accession_number']
+        return self.get_value_of_dict_key(self.get_project_dict(hit),'dbgap_accession_number')
 
     def get_disease_type(self, hit):
-        return self.get_cases_dict(hit)['disease_type']
+        return self.get_value_of_dict_key(self.get_cases_dict(hit),'disease_type')
 
     def get_primary_site(self, hit):
-        return self.get_cases_dict(hit)['primary_site']
+        return self.get_value_of_dict_key(self.get_cases_dict(hit),'primary_site')
 
     def get_tissue_type(self, hit):
-        return self.get_sample_dict(hit)['tissue_type']
+        return self.get_value_of_dict_key(self.get_sample_dict(hit),'tissue_type')
 
     def get_composition(self, hit):
-        return self.get_sample_dict(hit)['composition']
+        return self.get_value_of_dict_key(self.get_sample_dict(hit), 'composition')
 
     def get_sample_type(self, hit):
-        return self.get_sample_dict(hit)['sample_type']
+        return self.get_value_of_dict_key(self.get_sample_dict(hit),'sample_type')
 
     def get_sample_id(self, hit):
-        return self.get_sample_dict(hit)['sample_id']
+        return self.get_value_of_dict_key(self.get_sample_dict(hit),'sample_id')
 
     def json_to_dataframe(self, hits):
-
-        import pandas as pd
 
         index = ['filename', 'tissue_type', 'primary_diagnosis',
                  'tumor_stage', 'disease_type', 'gender', 'ethnicity',
                  'program_name', 'dbgap_accession_number', 'primary_site',
                  'tissue_type', 'composition', 'sample_type', 'sample_id',
                  'id']
+
+        rnaseq_df = None
 
         for hit in hits:
             outfields = [self.get_filename(hit), self.get_tissue_type(hit), self.get_primary_diagnosis(hit),
@@ -154,4 +169,21 @@ class RNAseq:
                          self.get_sample_id(hit),
                          self.get_id(hit)]
 
-            return pd.DataFrame(outfields, index=index)
+            df = pd.DataFrame(outfields, index=index).T
+
+            if rnaseq_df is None:
+                rnaseq_df = df
+            else:
+                rnaseq_df = rnaseq_df.append(df)
+
+        return rnaseq_df
+
+    def dump_df_to_file(self, df, empty_the_file=False):
+
+        if empty_the_file:
+            open(self.outfile, 'w').close()
+            df.to_csv(self.outfile, sep='\t', index=False)
+
+        else:
+            with open(self.outfile, 'a+') as f:
+                df.to_csv(f, sep='\t', index=False, header=False)
