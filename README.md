@@ -1,8 +1,8 @@
 # TCGA_Download
 
 ![OS](https://img.shields.io/conda/pn/conda-forge/tensorflow.svg?color=green)
-![tensorflow](https://img.shields.io/pypi/pyversions/tensorflow.svg)
-![contri](https://img.shields.io/github/contributors/MayurDivate/TCGA_data_download.svg)
+[![tensorflow](https://img.shields.io/pypi/pyversions/tensorflow.svg)](https://www.tensorflow.org/api_docs/python)
+[![contri](https://img.shields.io/github/contributors/MayurDivate/TCGA_data_download.svg)](https://github.com/MayurDivate/TCGA_Data_Download/graphs/contributors)
 
 
 This package provides utility to download data and meta-data from TCGA using its API.
