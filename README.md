@@ -1,5 +1,10 @@
 # TCGA_Download
 
+![OS](https://img.shields.io/conda/pn/conda-forge/tensorflow.svg?color=green)
+![tensorflow](https://img.shields.io/pypi/pyversions/tensorflow.svg)
+![contri](https://img.shields.io/github/contributors/MayurDivate/TCGA_data_download.svg)
+
+
 This package provides utility to download data and meta-data from TCGA using its API.
 
 #### Examples
