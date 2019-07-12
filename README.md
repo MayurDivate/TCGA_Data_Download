@@ -1,7 +1,7 @@
 # TCGA_Download
 
 ![OS](https://img.shields.io/conda/pn/conda-forge/tensorflow.svg?color=green)
-[![tensorflow](https://img.shields.io/pypi/pyversions/tensorflow.svg)](https://www.tensorflow.org/api_docs/python)
+[![tensorflow](https://img.shields.io/pypi/pyversions/requests.svg)](https://pypi.org/project/requests/)
 [![contri](https://img.shields.io/github/contributors/MayurDivate/TCGA_data_download.svg)](https://github.com/MayurDivate/TCGA_Data_Download/graphs/contributors)
 
 
