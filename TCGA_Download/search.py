@@ -6,7 +6,8 @@ class Query:
         self.endpoint = endpoint
         # self.fields = fields
         self.params = params
-        self.size = params['size']
+        if 'size' in params:
+            self.size = params['size']
 
     def get_headers(self, response):
         return response.headers
@@ -46,6 +47,19 @@ def get_filter(op, field, value):
     return my_filter
 
 
+def get_value_of_dict_key(self, dictX, keyX):
+    """
+    :param dictX:
+    :param keyX:
+    :return: it returns "None" string if key does not exist
+    """
+
+    if keyX in dictX:
+        return dictX[keyX]
+    else:
+        return 'None'
+
+
 def get_json_response(response):
     return response.json()
 
@@ -56,6 +70,10 @@ def get_data(js_response):
 
 def get_hits(js_response):
     return get_data(js_response).get('hits')
+
+
+def get_id(self, hit):
+    return self.get_value_of_dict_key(hit, 'id')
 
 
 def get_pagination(js_response):
