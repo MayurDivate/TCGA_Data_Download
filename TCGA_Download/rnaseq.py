@@ -166,7 +166,7 @@ class RNAseq:
         rnaseq_df = None
 
         for hit in hits:
-            
+
             outfields = [self.get_filename(hit), self.get_project_id(hit), self.get_tissue_type(hit),
                          self.get_primary_diagnosis(hit),
                          self.get_tumor_stage(hit), self.get_disease_type(hit), self.get_gender(hit),
