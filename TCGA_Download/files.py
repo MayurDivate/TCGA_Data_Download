@@ -39,7 +39,11 @@ class TCGA_File:
     def get_file_id_from_name(self):
         params =  self.get_params(self.get_filename_filter())
         fileq = Query(api.get_files_ep(), params)
+<<<<<<< HEAD
         #print(fileq.get_response())
+=======
+
+>>>>>>> dd12018cf7028fa025e9b61e7136c2b646cc284d
         file_id = query.get_hits(fileq.get_response())[0]['file_id']
 
         return file_id

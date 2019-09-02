@@ -10,6 +10,10 @@ from TCGA_Download.files import TCGA_File
 
 def download_files_by_file_names(file_names, outputdir=".", chunksize=50):
     ids = []
+<<<<<<< HEAD
+=======
+    print("Getting file ids")
+>>>>>>> dd12018cf7028fa025e9b61e7136c2b646cc284d
     for name in file_names:
         file_id = TCGA_File(name).get_file_id_from_name()
         ids.append(file_id)
@@ -18,8 +22,15 @@ def download_files_by_file_names(file_names, outputdir=".", chunksize=50):
     start = 0
     end = chunksize
 
+<<<<<<< HEAD
     while start < llen:
         print(start, llen)
+=======
+    print('Got the ids')
+
+    while start < llen:
+        print("Chunk from ", start, " to ", llen)
+>>>>>>> dd12018cf7028fa025e9b61e7136c2b646cc284d
         if end > llen:
             chunk_ids = ids[start:]
             download_files(chunk_ids, outputdir)
