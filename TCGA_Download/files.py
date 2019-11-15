@@ -39,7 +39,7 @@ class TCGA_File:
     def get_file_id_from_name(self):
         params = self.get_params(self.get_filename_filter())
         fileq = Query(api.get_files_ep(), params)
-
+        #print(fileq.get_response())
         file_id = query.get_hits(fileq.get_response())[0]['file_id']
         return file_id
 

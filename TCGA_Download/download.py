@@ -20,8 +20,6 @@ def download_files_by_file_names(file_names, outputdir=".", chunksize=50):
     start = 0
     end = chunksize
 
-    print('Got the ids')
-
     while start < llen:
         print("Chunk from ", start, " to ", llen)
         if end > llen:
