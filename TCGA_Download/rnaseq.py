@@ -6,6 +6,7 @@ import pandas as pd
 class RNAseq:
     default_fields = [
                      'file_name',
+                      'cases.submitter_id',
                       'project_id',
                       'cases.primary_site',
                       'cases.project.project_id',
@@ -141,6 +142,9 @@ class RNAseq:
     def get_disease_type(self, hit):
         return self.get_value_of_dict_key(self.get_cases_dict(hit), 'disease_type')
 
+    def get_submitter_id(self, hit):
+        return self.get_value_of_dict_key(self.get_cases_dict(hit), 'submitter_id')
+
     def get_primary_site(self, hit):
         return self.get_value_of_dict_key(self.get_cases_dict(hit), 'primary_site')
 
@@ -158,7 +162,7 @@ class RNAseq:
 
     def json_to_dataframe(self, hits):
 
-        index = ['filename', 'project_id', 'tissue_type', 'primary_diagnosis',
+        index = ['filename', 'submitter_id', 'project_id', 'tissue_type', 'primary_diagnosis',
                  'tumor_stage', 'disease_type', 'gender', 'ethnicity',
                  'program_name', 'dbgap_accession_number', 'primary_site',
                  'composition', 'sample_type', 'sample_id', 'id']
@@ -167,13 +171,14 @@ class RNAseq:
 
         for hit in hits:
 
-            outfields = [self.get_filename(hit), self.get_project_id(hit), self.get_tissue_type(hit),
-                         self.get_primary_diagnosis(hit),
-                         self.get_tumor_stage(hit), self.get_disease_type(hit), self.get_gender(hit),
-                         self.get_ethnicity(hit),
-                         self.get_program_name(hit), self.get_dbgap_accession_number(hit), self.get_primary_site(hit),
-                         self.get_composition(hit), self.get_sample_type(hit), self.get_sample_id(hit),
-                         self.get_id(hit)]
+            outfields = [self.get_filename(hit), self.get_submitter_id(hit),
+                         self.get_project_id(hit), self.get_tissue_type(hit),
+                         self.get_primary_diagnosis(hit), self.get_tumor_stage(hit),
+                         self.get_disease_type(hit), self.get_gender(hit),
+                         self.get_ethnicity(hit), self.get_program_name(hit),
+                         self.get_dbgap_accession_number(hit), self.get_primary_site(hit),
+                         self.get_composition(hit), self.get_sample_type(hit),
+                         self.get_sample_id(hit), self.get_id(hit)]
 
             df = pd.DataFrame(outfields, index=index).T
 
