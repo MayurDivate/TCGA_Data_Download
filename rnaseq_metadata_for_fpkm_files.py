@@ -44,4 +44,3 @@ for page in range(total_pages - 1):
     df = rnaseq_obj.json_to_dataframe(query.get_hits(js_res))
     rnaseq_obj.dump_df_to_file(df)
 
-
