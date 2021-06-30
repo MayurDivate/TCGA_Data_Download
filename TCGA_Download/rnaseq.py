@@ -5,6 +5,7 @@ import pandas as pd
 
 class RNAseq:
     default_fields = [
+<<<<<<< HEAD
                      'file_name',
                       'cases.submitter_id',
                       'project_id',
@@ -23,10 +24,30 @@ class RNAseq:
                       'cases.demographic.gender',
                       'cases.demographic.ethnicity'
                       ]
+=======
+        'file_name',
+        'project_id',
+        'cases.primary_site',
+        'cases.project.project_id',
+        'cases.disease_type',
+        #'cases.diagnoses.tissue_or_organ_of_origin',
+        #'cases.diagnoses.tumor_stage',
+        #'cases.diagnoses.primary_diagnosis',
+        'cases.project.dbgap_accession_number',
+        'cases.project.program.name',
+        'cases.samples.sample_type',
+        'cases.samples.tissue_type',
+        'cases.samples.sample_id',
+        'cases.samples.composition',
+        'cases.demographic.gender',
+        'cases.demographic.ethnicity',
+
+    ]
+>>>>>>> f988b03a7e3d9335b793c42d14103c535c2199da
 
     # default_expand = 'cases.samples,cases.project,cases.project.program'
 
-    def __init__(self, outfile='tcga_rnaseq.tsv', fields=None, expand=None):
+    def __init__(self, outfile='tcga_rnaseq.tsv', fields=None, expand='cases.diagnoses'):
 
         if fields is None:
             self.fields = self.default_fields
@@ -160,17 +181,28 @@ class RNAseq:
     def get_sample_id(self, hit):
         return self.get_value_of_dict_key(self.get_sample_dict(hit), 'sample_id')
 
+    def get_site_of_resection_or_biopsy(self, hit):
+        return self.get_value_of_dict_key(self.get_diagnoses_dict(hit), 'site_of_resection_or_biopsy')
+
+    def get_tumor_grade(self, hit):
+        return self.get_value_of_dict_key(self.get_diagnoses_dict(hit), 'tumor_grade')
+
+    def get_tissue_or_organ_of_origin(self,hit):
+        return self.get_value_of_dict_key(self.get_diagnoses_dict(hit), 'tissue_or_organ_of_origin')
+
     def json_to_dataframe(self, hits):
 
         index = ['filename', 'submitter_id', 'project_id', 'tissue_type', 'primary_diagnosis',
                  'tumor_stage', 'disease_type', 'gender', 'ethnicity',
-                 'program_name', 'dbgap_accession_number', 'primary_site',
-                 'composition', 'sample_type', 'sample_id', 'id']
+                 'program_name', 'dbgap_accession_number', 'primary_site', 'tissue_or_organ_of_origin',
+                 'composition', 'sample_type', 'site_of_resection_or_biopsy','tumor_grade',
+                 'sample_id', 'id']
 
         rnaseq_df = None
 
         for hit in hits:
 
+<<<<<<< HEAD
             outfields = [self.get_filename(hit), self.get_submitter_id(hit),
                          self.get_project_id(hit), self.get_tissue_type(hit),
                          self.get_primary_diagnosis(hit), self.get_tumor_stage(hit),
@@ -178,6 +210,16 @@ class RNAseq:
                          self.get_ethnicity(hit), self.get_program_name(hit),
                          self.get_dbgap_accession_number(hit), self.get_primary_site(hit),
                          self.get_composition(hit), self.get_sample_type(hit),
+=======
+            outfields = [self.get_filename(hit), self.get_project_id(hit), self.get_tissue_type(hit),
+                         self.get_primary_diagnosis(hit),
+                         self.get_tumor_stage(hit), self.get_disease_type(hit), self.get_gender(hit),
+                         self.get_ethnicity(hit),
+                         self.get_program_name(hit), self.get_dbgap_accession_number(hit), self.get_primary_site(hit),
+                         self.get_tissue_or_organ_of_origin(hit),
+                         self.get_composition(hit), self.get_sample_type(hit),
+                         self.get_site_of_resection_or_biopsy(hit), self.get_tumor_grade(hit),
+>>>>>>> f988b03a7e3d9335b793c42d14103c535c2199da
                          self.get_sample_id(hit), self.get_id(hit)]
 
             df = pd.DataFrame(outfields, index=index).T

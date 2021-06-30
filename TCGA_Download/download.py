@@ -16,6 +16,7 @@ def download_files_by_file_names(file_names, outputdir=".", chunksize=50):
         ids.append(file_id)
 
     llen = len(ids)
+    print(llen)
     start = 0
     end = chunksize
 
