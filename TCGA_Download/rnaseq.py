@@ -6,13 +6,13 @@ import pandas as pd
 class RNAseq:
     default_fields = [
         'file_name',
-        'project_id',
+        #'project_id',
         'cases.primary_site',
         'cases.project.project_id',
         'cases.disease_type',
-        #'cases.diagnoses.tissue_or_organ_of_origin',
-        #'cases.diagnoses.tumor_stage',
-        #'cases.diagnoses.primary_diagnosis',
+        'cases.diagnoses.tissue_or_organ_of_origin',
+        'cases.diagnoses.tumor_stage',
+        'cases.diagnoses.primary_diagnosis',
         'cases.project.dbgap_accession_number',
         'cases.project.program.name',
         'cases.samples.sample_type',
@@ -26,7 +26,7 @@ class RNAseq:
 
     # default_expand = 'cases.samples,cases.project,cases.project.program'
 
-    def __init__(self, outfile='tcga_rnaseq.tsv', fields=None, expand='cases.diagnoses'):
+    def __init__(self, outfile='test_tcga_rnaseq.tsv', fields=None, expand='cases.diagnoses'):
 
         if fields is None:
             self.fields = self.default_fields
@@ -56,6 +56,15 @@ class RNAseq:
                         "value": "RNA-Seq"
                     }
                 }
+                # adding filter to fetch only metadata of following file
+                # ,{
+                #     "op": "=",
+                #     "content": {
+                #         "field": "file_name",
+                #         "value": "d1489e83-a47f-4d2e-b330-c0698b1ccc27.htseq.counts.gz"
+                #     }
+                #}
+
             ]
 
         }

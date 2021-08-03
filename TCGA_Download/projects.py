@@ -1,3 +1,7 @@
+##
+# This is used to fetch project information
+# #
+
 import json as js
 
 import TCGA_Download.api_end_points as api
@@ -20,16 +24,6 @@ class Projects:
 
 
     def parse_project_info(self, pinfo):
-        """
-        data
-            hits[]
-
-            pagination
-
-        warnings
-        """
-
         print("Total projects: ",len(pinfo['data']['hits']))
-
         print(pinfo['data']['hits'][0])
         #print(pinfo['warnings'])

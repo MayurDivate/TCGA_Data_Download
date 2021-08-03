@@ -1,12 +1,16 @@
 import TCGA_Download.download as dw
+import os
 
-files_list = '/Users/n10337547/GitHub/TCGA_Data_Download/TCGA_Download/normal_download_sample_id.txt'
 
 def get_files_names(flist):
     return [file.rstrip() for file in open(flist, 'r')]
 
-filenames = get_files_names(files_list)
 
-output_dir = '/Users/n10337547/Projects/1_Data/Normal_redownload'
+rdir = '/Users/n10337547/Projects/1_Data/TCGA_Htseq_count/'
+files_list = [os.path.join(rdir, fx) for fx in os.listdir(rdir) if fx.startswith('count')]
 
-dw.download_files_by_file_names(filenames, output_dir)
+for fx in files_list:
+    print(">>> ", fx)
+    filenames = get_files_names(fx)
+    output_dir = '/Users/n10337547/Projects/1_Data/TCGA_Htseq_count/downloaded'
+    dw.download_files(filenames, output_dir)

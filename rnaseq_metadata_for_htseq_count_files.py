@@ -11,21 +11,22 @@ from TCGA_Download.rnaseq import RNAseq
 # fields = ['file_name','cases.primary_site']
 
 
-rnaseq_obj = RNAseq()
-
-wtype = query.get_filter('=', 'analysis.workflow_type', 'HTSeq - FPKM')
+#rnaseq_obj = RNAseq(expand=['analysis'])
+rnaseq_obj = RNAseq(outfile='TCGA_RNAseq_htseq_count.txt')
+wtype = query.get_filter('=', 'analysis.workflow_type', 'HTSeq - Counts')
 
 filters = query.add_filter(rnaseq_obj.get_filters(), wtype)
 
 rnaseq_obj.filters = filters
 
 # chuncksize = number of records per page
-
 chunksize = 100
 
 rnaseq_query = query.Query(api.get_files_ep(), rnaseq_obj.get_params(size=chunksize))
 
 js_res = rnaseq_query.get_response()
+
+print(js_res)
 
 print(query.get_pagination(js_res))
 

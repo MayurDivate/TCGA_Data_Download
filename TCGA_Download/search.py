@@ -1,3 +1,12 @@
+##
+#  Query class
+#   query object is used to search data in chunk
+#
+# this class helps to retive data chunk by chunk
+#
+#
+# #
+
 import requests
 
 
