@@ -36,9 +36,11 @@ print('page number: ', query.get_current_page_number(js_res))
 df = rnaseq_obj.json_to_dataframe(query.get_hits(js_res))
 rnaseq_obj.dump_df_to_file(df, True)
 
+
 # page 2 to page last page
 for page in range(total_pages - 1):
     js_res = rnaseq_query.get_next_page_response()
     print('page number: ', query.get_current_page_number(js_res))
     df = rnaseq_obj.json_to_dataframe(query.get_hits(js_res))
     rnaseq_obj.dump_df_to_file(df)
+
